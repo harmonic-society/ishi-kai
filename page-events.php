@@ -39,11 +39,21 @@ get_header();
             <h2 class="events-section-title">今後のイベント</h2>
 
             <?php
+            $today = date('Y-m-d\TH:i');
             $upcoming_events = new WP_Query(array(
                 'post_type'      => 'event',
                 'posts_per_page' => -1,
-                'orderby'        => 'date',
-                'order'          => 'DESC',
+                'meta_key'       => 'event_datetime_start',
+                'orderby'        => 'meta_value',
+                'order'          => 'ASC',
+                'meta_query'     => array(
+                    array(
+                        'key'     => 'event_datetime_start',
+                        'value'   => $today,
+                        'compare' => '>=',
+                        'type'    => 'DATETIME',
+                    ),
+                ),
             ));
 
             if ($upcoming_events->have_posts()) :
@@ -126,9 +136,17 @@ get_header();
             $past_events = new WP_Query(array(
                 'post_type'      => 'event',
                 'posts_per_page' => 6,
-                'orderby'        => 'date',
+                'meta_key'       => 'event_datetime_start',
+                'orderby'        => 'meta_value',
                 'order'          => 'DESC',
-                'offset'         => 0,
+                'meta_query'     => array(
+                    array(
+                        'key'     => 'event_datetime_start',
+                        'value'   => $today,
+                        'compare' => '<',
+                        'type'    => 'DATETIME',
+                    ),
+                ),
             ));
 
             if ($past_events->have_posts()) :
