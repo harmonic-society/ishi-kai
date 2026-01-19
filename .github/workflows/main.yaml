@@ -24,15 +24,21 @@ jobs:
             THEME_DIR="/home/wp629555/ishi-kai.com/public_html/wp-content/themes/ishi-kai-theme"
             REPO_URL="https://github.com/harmonic-society/ishi-kai.git"
 
+            # .gitがない場合はディレクトリを削除して再クローン
+            if [ -d "$THEME_DIR" ] && [ ! -d "$THEME_DIR/.git" ]; then
+              echo "Removing directory without .git..."
+              rm -rf "$THEME_DIR"
+            fi
+
             if [ ! -d "$THEME_DIR" ]; then
-              mkdir -p "$THEME_DIR"
+              echo "Cloning repository..."
               git clone "$REPO_URL" "$THEME_DIR"
             else
+              echo "Updating repository..."
               cd "$THEME_DIR"
-              if [ ! -d ".git" ]; then
-                git clone "$REPO_URL" .
-              else
-                git fetch origin main
-                git reset --hard origin/main
-              fi
+              git fetch origin main
+              git reset --hard origin/main
             fi
+
+            echo "Deploy completed. Listing files:"
+            ls -la "$THEME_DIR"
