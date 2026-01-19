@@ -305,6 +305,72 @@ function ishikai_entry_categories() {
 }
 
 /**
+ * カスタマイザー設定
+ */
+function ishikai_customize_register($wp_customize) {
+    // ヒーローセクション
+    $wp_customize->add_section('ishikai_hero_section', array(
+        'title'    => __('ヒーローセクション', 'ishi-kai-theme'),
+        'priority' => 30,
+    ));
+
+    // ヒーロー背景画像
+    $wp_customize->add_setting('ishikai_hero_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'ishikai_hero_image', array(
+        'label'    => __('ヒーロー背景画像', 'ishi-kai-theme'),
+        'section'  => 'ishikai_hero_section',
+        'settings' => 'ishikai_hero_image',
+    )));
+
+    // ヒーローオーバーレイの透明度
+    $wp_customize->add_setting('ishikai_hero_overlay_opacity', array(
+        'default'           => '0.6',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ishikai_hero_overlay_opacity', array(
+        'label'       => __('オーバーレイの透明度', 'ishi-kai-theme'),
+        'description' => __('0（透明）〜1（不透明）', 'ishi-kai-theme'),
+        'section'     => 'ishikai_hero_section',
+        'type'        => 'number',
+        'input_attrs' => array(
+            'min'  => 0,
+            'max'  => 1,
+            'step' => 0.1,
+        ),
+    ));
+
+    // ヒーロータイトル
+    $wp_customize->add_setting('ishikai_hero_title', array(
+        'default'           => get_bloginfo('name'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ishikai_hero_title', array(
+        'label'   => __('ヒーロータイトル', 'ishi-kai-theme'),
+        'section' => 'ishikai_hero_section',
+        'type'    => 'text',
+    ));
+
+    // ヒーローサブタイトル
+    $wp_customize->add_setting('ishikai_hero_subtitle', array(
+        'default'           => get_bloginfo('description'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ishikai_hero_subtitle', array(
+        'label'   => __('ヒーローサブタイトル', 'ishi-kai-theme'),
+        'section' => 'ishikai_hero_section',
+        'type'    => 'textarea',
+    ));
+}
+add_action('customize_register', 'ishikai_customize_register');
+
+/**
  * パンくずリストの出力
  */
 function ishikai_breadcrumb() {
