@@ -1044,6 +1044,12 @@
     font-family: var(--font-family-base);
 }
 
+.event-location-compact {
+    font-size: 0.875rem;
+    color: var(--color-gray);
+    margin: 0.25rem 0 0;
+}
+
 /* ==========================================================================
    About Page
    ========================================================================== */
