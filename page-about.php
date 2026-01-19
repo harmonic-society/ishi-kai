@@ -44,14 +44,14 @@ get_header();
                                 <span class="dashicons dashicons-heart"></span>
                             </div>
                             <h3>相互理解</h3>
-                            <p>会員同士が互いの考えを尊重し、理解を深め合うことを大切にしています。</p>
+                            <p>メンバー同士が互いの考えを尊重し、理解を深め合うことを大切にしています。</p>
                         </div>
                         <div class="philosophy-item">
                             <div class="philosophy-icon">
                                 <span class="dashicons dashicons-groups"></span>
                             </div>
                             <h3>交流促進</h3>
-                            <p>定期的な集まりやイベントを通じて、会員間の絆を深める活動を行っています。</p>
+                            <p>定期的な集まりやイベントを通じて、メンバー間の絆を深める活動を行っています。</p>
                         </div>
                         <div class="philosophy-item">
                             <div class="philosophy-icon">
