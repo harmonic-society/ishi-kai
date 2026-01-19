@@ -1063,6 +1063,46 @@
     margin-bottom: var(--spacing-xl);
 }
 
+/* Representative Message */
+.about-message {
+    background: linear-gradient(135deg, var(--color-ai) 0%, var(--color-ai-dark) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.message-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.message-text {
+    font-size: 1.125rem;
+    line-height: 2;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-lg);
+}
+
+.message-author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.author-title {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.author-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-white);
+    font-family: var(--font-family-serif);
+}
+
 .about-section-title {
     font-size: 1.5rem;
     color: var(--color-ai);

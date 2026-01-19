@@ -21,6 +21,21 @@ get_header();
                     <p class="page-subtitle">About Us</p>
                 </header>
 
+                <!-- 代表メッセージ -->
+                <section class="about-section about-message">
+                    <div class="message-content">
+                        <p class="message-text">
+                            今日本は、危機的状況に陥っています。<br>
+                            私自身たくさんの人たちと出会い、数々のイベントの主催や参加、個人事業の経験で気づけたこと。<br>
+                            それは、人と人の繋がりの大切さ。先人たちの教えを大切に、一丸性を目指します。
+                        </p>
+                        <p class="message-author">
+                            <span class="author-title">代表</span>
+                            <span class="author-name">石井 聡</span>
+                        </p>
+                    </div>
+                </section>
+
                 <!-- メインビジュアル -->
                 <?php if (has_post_thumbnail()) : ?>
                     <div class="about-hero">
