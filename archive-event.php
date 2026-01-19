@@ -20,7 +20,34 @@ get_header();
 
         <?php if (have_posts()) : ?>
             <div class="events-grid">
-                <?php while (have_posts()) : the_post(); ?>
+                <?php while (have_posts()) : the_post();
+                    // カスタムフィールドの取得
+                    $event_datetime_start = get_post_meta(get_the_ID(), 'event_datetime_start', true);
+                    $event_datetime_end = get_post_meta(get_the_ID(), 'event_datetime_end', true);
+                    $event_location = get_post_meta(get_the_ID(), 'event_location', true);
+                    $event_fee = get_post_meta(get_the_ID(), 'event_fee', true);
+
+                    // 日時を日本語形式にフォーマット
+                    $event_datetime_display = '';
+                    $datetime_attr = '';
+                    if ($event_datetime_start) {
+                        $weekdays = array('日', '月', '火', '水', '木', '金', '土');
+                        $start_timestamp = strtotime($event_datetime_start);
+                        $start_weekday = $weekdays[date('w', $start_timestamp)];
+                        $event_datetime_display = date('Y年n月j日', $start_timestamp) . '（' . $start_weekday . '）' . date('H:i', $start_timestamp);
+                        $datetime_attr = date('Y-m-d\TH:i', $start_timestamp);
+
+                        if ($event_datetime_end) {
+                            $end_timestamp = strtotime($event_datetime_end);
+                            if (date('Y-m-d', $start_timestamp) === date('Y-m-d', $end_timestamp)) {
+                                $event_datetime_display .= '〜' . date('H:i', $end_timestamp);
+                            } else {
+                                $end_weekday = $weekdays[date('w', $end_timestamp)];
+                                $event_datetime_display .= '〜' . date('Y年n月j日', $end_timestamp) . '（' . $end_weekday . '）' . date('H:i', $end_timestamp);
+                            }
+                        }
+                    }
+                ?>
                     <article id="post-<?php the_ID(); ?>" <?php post_class('event-card'); ?>>
                         <?php if (has_post_thumbnail()) : ?>
                             <a href="<?php the_permalink(); ?>" class="event-card-thumbnail">
@@ -29,15 +56,23 @@ get_header();
                         <?php endif; ?>
 
                         <div class="event-card-content">
-                            <time class="event-card-date" datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>">
-                                <?php echo esc_html(get_the_date()); ?>
-                            </time>
+                            <?php if ($event_datetime_display) : ?>
+                                <time class="event-card-date" datetime="<?php echo esc_attr($datetime_attr); ?>">
+                                    <?php echo esc_html($event_datetime_display); ?>
+                                </time>
+                            <?php endif; ?>
                             <h2 class="event-card-title">
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h2>
-                            <div class="event-card-excerpt">
-                                <?php the_excerpt(); ?>
-                            </div>
+                            <?php if ($event_location) : ?>
+                                <p class="event-card-location">
+                                    <span class="dashicons dashicons-location"></span>
+                                    <?php echo esc_html(wp_trim_words($event_location, 20, '...')); ?>
+                                </p>
+                            <?php endif; ?>
+                            <?php if ($event_fee) : ?>
+                                <p class="event-card-fee"><?php echo esc_html($event_fee); ?></p>
+                            <?php endif; ?>
                             <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-primary">詳細を見る</a>
                         </div>
                     </article>
