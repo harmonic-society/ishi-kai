@@ -10,6 +10,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// デバッグ: functions.phpが読み込まれているか確認
+add_action('admin_notices', function() {
+    echo '<div class="notice notice-success"><p><strong>Ishi-kai Theme:</strong> functions.php v1.1 が正常に読み込まれています</p></div>';
+});
+
 /**
  * Theme Setup
  */
@@ -307,55 +312,48 @@ function ishikai_entry_categories() {
 /**
  * カスタマイザー設定
  */
-function ishikai_customize_register($wp_customize) {
+add_action('customize_register', function($wp_customize) {
     // ヒーローセクション
-    $wp_customize->add_section('ishikai_hero_section', array(
-        'title'       => 'ヒーローセクション',
-        'description' => 'TOPページのヒーロー画像とテキストを設定します',
-        'priority'    => 25,
-        'capability'  => 'edit_theme_options',
+    $wp_customize->add_section('ishikai_hero', array(
+        'title'    => 'ヒーロー設定',
+        'priority' => 20,
     ));
 
     // ヒーロー画像
     $wp_customize->add_setting('ishikai_hero_image', array(
-        'default'           => '',
-        'transport'         => 'refresh',
-        'sanitize_callback' => 'esc_url_raw',
+        'default' => '',
     ));
 
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'ishikai_hero_image', array(
-        'label'       => 'ヒーロー画像',
-        'description' => 'タイトルとボタンの間に表示される画像',
-        'section'     => 'ishikai_hero_section',
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'ishikai_hero_image_control', array(
+        'label'   => 'ヒーロー画像',
+        'section' => 'ishikai_hero',
+        'settings' => 'ishikai_hero_image',
     )));
 
     // ヒーロータイトル
     $wp_customize->add_setting('ishikai_hero_title', array(
-        'default'           => '',
-        'transport'         => 'refresh',
-        'sanitize_callback' => 'sanitize_text_field',
+        'default' => '',
     ));
 
-    $wp_customize->add_control('ishikai_hero_title', array(
+    $wp_customize->add_control('ishikai_hero_title_control', array(
         'label'   => 'ヒーロータイトル',
-        'section' => 'ishikai_hero_section',
+        'section' => 'ishikai_hero',
+        'settings' => 'ishikai_hero_title',
         'type'    => 'text',
     ));
 
     // ヒーローサブタイトル
     $wp_customize->add_setting('ishikai_hero_subtitle', array(
-        'default'           => '',
-        'transport'         => 'refresh',
-        'sanitize_callback' => 'sanitize_text_field',
+        'default' => '',
     ));
 
-    $wp_customize->add_control('ishikai_hero_subtitle', array(
+    $wp_customize->add_control('ishikai_hero_subtitle_control', array(
         'label'   => 'ヒーローサブタイトル',
-        'section' => 'ishikai_hero_section',
+        'section' => 'ishikai_hero',
+        'settings' => 'ishikai_hero_subtitle',
         'type'    => 'textarea',
     ));
-}
-add_action('customize_register', 'ishikai_customize_register');
+});
 
 /**
  * パンくずリストの出力
