@@ -194,6 +194,97 @@ function ishikai_register_post_types() {
 add_action('init', 'ishikai_register_post_types');
 
 /**
+ * イベント用カスタムフィールド（メタボックス）
+ */
+function ishikai_event_meta_boxes() {
+    add_meta_box(
+        'ishikai_event_details',
+        'イベント詳細情報',
+        'ishikai_event_meta_box_callback',
+        'event',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'ishikai_event_meta_boxes');
+
+/**
+ * イベントメタボックスの表示
+ */
+function ishikai_event_meta_box_callback($post) {
+    wp_nonce_field('ishikai_event_meta_box', 'ishikai_event_meta_box_nonce');
+
+    $fields = array(
+        'event_datetime' => array('label' => '日時', 'type' => 'text', 'placeholder' => '例: 2024年4月1日（土）14:00〜17:00'),
+        'event_location' => array('label' => '場所（会場／アクセス）', 'type' => 'textarea', 'placeholder' => '会場名、住所、最寄り駅からのアクセスなど'),
+        'event_summary' => array('label' => '概要（イベントの趣旨）', 'type' => 'textarea', 'placeholder' => 'イベントの趣旨・どんな会かを説明'),
+        'event_schedule' => array('label' => '内容（当日の流れ）', 'type' => 'textarea', 'placeholder' => 'タイムテーブル・当日の流れ'),
+        'event_target' => array('label' => '対象者（こんな方におすすめ）', 'type' => 'textarea', 'placeholder' => '参加をおすすめしたい方'),
+        'event_fee' => array('label' => '参加費', 'type' => 'text', 'placeholder' => '例: 3,000円（学生1,500円）'),
+        'event_capacity' => array('label' => '定員', 'type' => 'text', 'placeholder' => '例: 30名'),
+        'event_registration' => array('label' => '申込方法', 'type' => 'textarea', 'placeholder' => '申込フォームURL、申込方法の説明など'),
+        'event_organizer' => array('label' => '主催', 'type' => 'text', 'placeholder' => '例: 石井会'),
+        'event_contact' => array('label' => '問い合わせ先', 'type' => 'textarea', 'placeholder' => 'メールアドレス、電話番号など'),
+        'event_notes' => array('label' => '注意事項', 'type' => 'textarea', 'placeholder' => 'キャンセル規定、持ち物、その他注意事項など'),
+    );
+
+    echo '<table class="form-table">';
+    foreach ($fields as $key => $field) {
+        $value = get_post_meta($post->ID, $key, true);
+        echo '<tr>';
+        echo '<th><label for="' . esc_attr($key) . '">' . esc_html($field['label']) . '</label></th>';
+        echo '<td>';
+        if ($field['type'] === 'textarea') {
+            echo '<textarea id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" rows="4" class="large-text" placeholder="' . esc_attr($field['placeholder']) . '">' . esc_textarea($value) . '</textarea>';
+        } else {
+            echo '<input type="text" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" class="regular-text" placeholder="' . esc_attr($field['placeholder']) . '">';
+        }
+        echo '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+
+/**
+ * イベントメタデータの保存
+ */
+function ishikai_save_event_meta($post_id) {
+    if (!isset($_POST['ishikai_event_meta_box_nonce'])) {
+        return;
+    }
+    if (!wp_verify_nonce($_POST['ishikai_event_meta_box_nonce'], 'ishikai_event_meta_box')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    $fields = array(
+        'event_datetime',
+        'event_location',
+        'event_summary',
+        'event_schedule',
+        'event_target',
+        'event_fee',
+        'event_capacity',
+        'event_registration',
+        'event_organizer',
+        'event_contact',
+        'event_notes',
+    );
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            update_post_meta($post_id, $field, sanitize_textarea_field($_POST[$field]));
+        }
+    }
+}
+add_action('save_post_event', 'ishikai_save_event_meta');
+
+/**
  * ウィジェットエリアの登録
  */
 function ishikai_widgets_init() {

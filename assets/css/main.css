@@ -717,6 +717,70 @@
     margin: 0;
 }
 
+/* Event Datetime Badge */
+.event-datetime-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-shu);
+    color: var(--color-white);
+    font-size: 0.875rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+/* Event Sections */
+.event-section {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.event-section-title {
+    font-size: 1.25rem;
+    color: var(--color-ai);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-ai);
+}
+
+.event-section-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-gray-dark);
+}
+
+/* Registration Section - Highlighted */
+.event-registration-section {
+    background-color: var(--color-off-white);
+    border: 2px solid var(--color-ai);
+}
+
+.event-registration-section .event-section-title {
+    color: var(--color-ai);
+}
+
+/* Notes Section - Warning Style */
+.event-notes-section {
+    background-color: #fff9e6;
+    border-left: 4px solid #e6a700;
+}
+
+.event-notes-section .event-section-title {
+    color: #996f00;
+    border-bottom-color: #e6a700;
+}
+
+/* Contact Section */
+.event-contact-section {
+    background-color: var(--color-off-white);
+}
+
+.event-contact-section .event-section-title {
+    color: var(--color-ai);
+}
+
 /* ==========================================================================
    Post Navigation
    ========================================================================== */
