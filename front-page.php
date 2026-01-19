@@ -12,28 +12,26 @@ get_header();
     <!-- ヒーローセクション -->
     <?php
     $hero_image = get_theme_mod('ishikai_hero_image', '');
-    $hero_overlay_opacity = get_theme_mod('ishikai_hero_overlay_opacity', '0.6');
     $hero_title = get_theme_mod('ishikai_hero_title', get_bloginfo('name'));
     $hero_subtitle = get_theme_mod('ishikai_hero_subtitle', get_bloginfo('description'));
-
-    $hero_style = '';
-    if ($hero_image) {
-        $hero_style = 'style="background-image: url(' . esc_url($hero_image) . ');"';
-    }
     ?>
-    <section class="hero-section<?php echo $hero_image ? ' has-background-image' : ''; ?>" <?php echo $hero_style; ?>>
-        <?php if ($hero_image) : ?>
-            <div class="hero-overlay" style="opacity: <?php echo esc_attr($hero_overlay_opacity); ?>;"></div>
-        <?php endif; ?>
+    <section class="hero-section">
         <div class="hero-inner container">
             <div class="hero-content">
                 <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
                 <?php if ($hero_subtitle) : ?>
                     <p class="hero-description"><?php echo esc_html($hero_subtitle); ?></p>
                 <?php endif; ?>
+
+                <?php if ($hero_image) : ?>
+                    <div class="hero-image">
+                        <img src="<?php echo esc_url($hero_image); ?>" alt="<?php echo esc_attr($hero_title); ?>">
+                    </div>
+                <?php endif; ?>
+
                 <div class="hero-buttons">
                     <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn-primary">団体概要</a>
-                    <a href="<?php echo esc_url(home_url('/events/')); ?>" class="btn btn-outline-white">イベント情報</a>
+                    <a href="<?php echo esc_url(home_url('/events/')); ?>" class="btn btn-outline">イベント情報</a>
                 </div>
             </div>
         </div>

@@ -314,35 +314,18 @@ function ishikai_customize_register($wp_customize) {
         'priority' => 30,
     ));
 
-    // ヒーロー背景画像
+    // ヒーロー画像
     $wp_customize->add_setting('ishikai_hero_image', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'ishikai_hero_image', array(
-        'label'    => __('ヒーロー背景画像', 'ishi-kai-theme'),
-        'section'  => 'ishikai_hero_section',
-        'settings' => 'ishikai_hero_image',
-    )));
-
-    // ヒーローオーバーレイの透明度
-    $wp_customize->add_setting('ishikai_hero_overlay_opacity', array(
-        'default'           => '0.6',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-
-    $wp_customize->add_control('ishikai_hero_overlay_opacity', array(
-        'label'       => __('オーバーレイの透明度', 'ishi-kai-theme'),
-        'description' => __('0（透明）〜1（不透明）', 'ishi-kai-theme'),
+        'label'       => __('ヒーロー画像', 'ishi-kai-theme'),
+        'description' => __('タイトルとボタンの間に表示される画像', 'ishi-kai-theme'),
         'section'     => 'ishikai_hero_section',
-        'type'        => 'number',
-        'input_attrs' => array(
-            'min'  => 0,
-            'max'  => 1,
-            'step' => 0.1,
-        ),
-    ));
+        'settings'    => 'ishikai_hero_image',
+    )));
 
     // ヒーロータイトル
     $wp_customize->add_setting('ishikai_hero_title', array(
