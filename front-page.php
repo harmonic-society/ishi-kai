@@ -31,7 +31,7 @@ get_header();
 
                 <div class="hero-buttons">
                     <a href="<?php echo esc_url(home_url('/about/')); ?>" class="btn btn-primary">団体概要</a>
-                    <a href="<?php echo esc_url(home_url('/events/')); ?>" class="btn btn-outline">イベント情報</a>
+                    <a href="<?php echo esc_url(home_url('/events/')); ?>" class="btn btn-outline-white">イベント情報</a>
                 </div>
             </div>
         </div>
