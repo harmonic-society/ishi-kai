@@ -36,9 +36,14 @@ jobs:
             else
               echo "Updating repository..."
               cd "$THEME_DIR"
-              git fetch origin main
+              git fetch --all
+              git checkout main
               git reset --hard origin/main
+              git pull origin main
             fi
+
+            echo "Current commit:"
+            cd "$THEME_DIR" && git log -1 --oneline
 
             echo "Deploy completed. Listing files:"
             ls -la "$THEME_DIR"
