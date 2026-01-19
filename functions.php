@@ -310,43 +310,47 @@ function ishikai_entry_categories() {
 function ishikai_customize_register($wp_customize) {
     // ヒーローセクション
     $wp_customize->add_section('ishikai_hero_section', array(
-        'title'    => __('ヒーローセクション', 'ishi-kai-theme'),
-        'priority' => 30,
+        'title'       => 'ヒーローセクション',
+        'description' => 'TOPページのヒーロー画像とテキストを設定します',
+        'priority'    => 25,
+        'capability'  => 'edit_theme_options',
     ));
 
     // ヒーロー画像
     $wp_customize->add_setting('ishikai_hero_image', array(
         'default'           => '',
+        'transport'         => 'refresh',
         'sanitize_callback' => 'esc_url_raw',
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'ishikai_hero_image', array(
-        'label'       => __('ヒーロー画像', 'ishi-kai-theme'),
-        'description' => __('タイトルとボタンの間に表示される画像', 'ishi-kai-theme'),
+        'label'       => 'ヒーロー画像',
+        'description' => 'タイトルとボタンの間に表示される画像',
         'section'     => 'ishikai_hero_section',
-        'settings'    => 'ishikai_hero_image',
     )));
 
     // ヒーロータイトル
     $wp_customize->add_setting('ishikai_hero_title', array(
-        'default'           => get_bloginfo('name'),
+        'default'           => '',
+        'transport'         => 'refresh',
         'sanitize_callback' => 'sanitize_text_field',
     ));
 
     $wp_customize->add_control('ishikai_hero_title', array(
-        'label'   => __('ヒーロータイトル', 'ishi-kai-theme'),
+        'label'   => 'ヒーロータイトル',
         'section' => 'ishikai_hero_section',
         'type'    => 'text',
     ));
 
     // ヒーローサブタイトル
     $wp_customize->add_setting('ishikai_hero_subtitle', array(
-        'default'           => get_bloginfo('description'),
+        'default'           => '',
+        'transport'         => 'refresh',
         'sanitize_callback' => 'sanitize_text_field',
     ));
 
     $wp_customize->add_control('ishikai_hero_subtitle', array(
-        'label'   => __('ヒーローサブタイトル', 'ishi-kai-theme'),
+        'label'   => 'ヒーローサブタイトル',
         'section' => 'ishikai_hero_section',
         'type'    => 'textarea',
     ));
