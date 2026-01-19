@@ -15,7 +15,8 @@ get_header();
         <?php while (have_posts()) : the_post(); ?>
             <?php
             // カスタムフィールドの取得
-            $event_datetime = get_post_meta(get_the_ID(), 'event_datetime', true);
+            $event_datetime_start = get_post_meta(get_the_ID(), 'event_datetime_start', true);
+            $event_datetime_end = get_post_meta(get_the_ID(), 'event_datetime_end', true);
             $event_location = get_post_meta(get_the_ID(), 'event_location', true);
             $event_summary = get_post_meta(get_the_ID(), 'event_summary', true);
             $event_schedule = get_post_meta(get_the_ID(), 'event_schedule', true);
@@ -26,14 +27,34 @@ get_header();
             $event_organizer = get_post_meta(get_the_ID(), 'event_organizer', true);
             $event_contact = get_post_meta(get_the_ID(), 'event_contact', true);
             $event_notes = get_post_meta(get_the_ID(), 'event_notes', true);
+
+            // 日時を日本語形式にフォーマット
+            $event_datetime_display = '';
+            if ($event_datetime_start) {
+                $weekdays = array('日', '月', '火', '水', '木', '金', '土');
+                $start_timestamp = strtotime($event_datetime_start);
+                $start_weekday = $weekdays[date('w', $start_timestamp)];
+                $event_datetime_display = date('Y年n月j日', $start_timestamp) . '（' . $start_weekday . '）' . date('H:i', $start_timestamp);
+
+                if ($event_datetime_end) {
+                    $end_timestamp = strtotime($event_datetime_end);
+                    // 同じ日なら時間だけ追加
+                    if (date('Y-m-d', $start_timestamp) === date('Y-m-d', $end_timestamp)) {
+                        $event_datetime_display .= '〜' . date('H:i', $end_timestamp);
+                    } else {
+                        $end_weekday = $weekdays[date('w', $end_timestamp)];
+                        $event_datetime_display .= '〜' . date('Y年n月j日', $end_timestamp) . '（' . $end_weekday . '）' . date('H:i', $end_timestamp);
+                    }
+                }
+            }
             ?>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class('single-event'); ?>>
                 <header class="entry-header">
                     <div class="entry-meta-top">
                         <span class="post-type-label">イベント</span>
-                        <?php if ($event_datetime) : ?>
-                            <span class="event-datetime-badge"><?php echo esc_html($event_datetime); ?></span>
+                        <?php if ($event_datetime_display) : ?>
+                            <span class="event-datetime-badge"><?php echo esc_html($event_datetime_display); ?></span>
                         <?php endif; ?>
                     </div>
                     <h1 class="entry-title"><?php the_title(); ?></h1>
@@ -49,10 +70,10 @@ get_header();
                 <div class="event-details-box">
                     <h2 class="event-details-title">イベント情報</h2>
                     <dl class="event-details-list">
-                        <?php if ($event_datetime) : ?>
+                        <?php if ($event_datetime_display) : ?>
                         <div class="event-detail-item">
                             <dt>日時</dt>
-                            <dd><?php echo nl2br(esc_html($event_datetime)); ?></dd>
+                            <dd><?php echo esc_html($event_datetime_display); ?></dd>
                         </div>
                         <?php endif; ?>
 

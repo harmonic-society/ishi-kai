@@ -214,8 +214,28 @@ add_action('add_meta_boxes', 'ishikai_event_meta_boxes');
 function ishikai_event_meta_box_callback($post) {
     wp_nonce_field('ishikai_event_meta_box', 'ishikai_event_meta_box_nonce');
 
+    // 日時フィールドの取得
+    $event_datetime_start = get_post_meta($post->ID, 'event_datetime_start', true);
+    $event_datetime_end = get_post_meta($post->ID, 'event_datetime_end', true);
+
+    // 日時フィールド（カレンダーUI）
+    echo '<table class="form-table">';
+    echo '<tr>';
+    echo '<th><label for="event_datetime_start">開始日時</label></th>';
+    echo '<td>';
+    echo '<input type="datetime-local" id="event_datetime_start" name="event_datetime_start" value="' . esc_attr($event_datetime_start) . '" style="width: 250px;">';
+    echo '</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<th><label for="event_datetime_end">終了日時</label></th>';
+    echo '<td>';
+    echo '<input type="datetime-local" id="event_datetime_end" name="event_datetime_end" value="' . esc_attr($event_datetime_end) . '" style="width: 250px;">';
+    echo '</td>';
+    echo '</tr>';
+    echo '</table>';
+
+    // その他のフィールド
     $fields = array(
-        'event_datetime' => array('label' => '日時', 'type' => 'text', 'placeholder' => '例: 2024年4月1日（土）14:00〜17:00'),
         'event_location' => array('label' => '場所（会場／アクセス）', 'type' => 'textarea', 'placeholder' => '会場名、住所、最寄り駅からのアクセスなど'),
         'event_summary' => array('label' => '概要（イベントの趣旨）', 'type' => 'textarea', 'placeholder' => 'イベントの趣旨・どんな会かを説明'),
         'event_schedule' => array('label' => '内容（当日の流れ）', 'type' => 'textarea', 'placeholder' => 'タイムテーブル・当日の流れ'),
@@ -263,7 +283,8 @@ function ishikai_save_event_meta($post_id) {
     }
 
     $fields = array(
-        'event_datetime',
+        'event_datetime_start',
+        'event_datetime_end',
         'event_location',
         'event_summary',
         'event_schedule',
