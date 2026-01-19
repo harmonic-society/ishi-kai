@@ -21,6 +21,18 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /home/wp629555/ishi-kai.com/public_html/wp-content/themes/ishi-kai-theme
-            git fetch origin main
-            git reset --hard origin/main
+            THEME_DIR="/home/wp629555/ishi-kai.com/public_html/wp-content/themes/ishi-kai-theme"
+            REPO_URL="https://github.com/harmonic-society/ishi-kai.git"
+
+            if [ ! -d "$THEME_DIR" ]; then
+              mkdir -p "$THEME_DIR"
+              git clone "$REPO_URL" "$THEME_DIR"
+            else
+              cd "$THEME_DIR"
+              if [ ! -d ".git" ]; then
+                git clone "$REPO_URL" .
+              else
+                git fetch origin main
+                git reset --hard origin/main
+              fi
+            fi
