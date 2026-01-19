@@ -353,6 +353,62 @@ add_action('customize_register', function($wp_customize) {
         'settings' => 'ishikai_hero_subtitle',
         'type'    => 'textarea',
     ));
+
+    // ===========================================
+    // 団体情報セクション
+    // ===========================================
+    $wp_customize->add_section('ishikai_org_info', array(
+        'title'    => '団体情報',
+        'priority' => 25,
+    ));
+
+    // 設立年
+    $wp_customize->add_setting('ishikai_org_established', array(
+        'default' => '',
+    ));
+
+    $wp_customize->add_control('ishikai_org_established_control', array(
+        'label'    => '設立',
+        'section'  => 'ishikai_org_info',
+        'settings' => 'ishikai_org_established',
+        'type'     => 'text',
+    ));
+
+    // 代表者名
+    $wp_customize->add_setting('ishikai_org_representative', array(
+        'default' => '',
+    ));
+
+    $wp_customize->add_control('ishikai_org_representative_control', array(
+        'label'    => '代表',
+        'section'  => 'ishikai_org_info',
+        'settings' => 'ishikai_org_representative',
+        'type'     => 'text',
+    ));
+
+    // 所在地
+    $wp_customize->add_setting('ishikai_org_address', array(
+        'default' => '',
+    ));
+
+    $wp_customize->add_control('ishikai_org_address_control', array(
+        'label'    => '所在地',
+        'section'  => 'ishikai_org_info',
+        'settings' => 'ishikai_org_address',
+        'type'     => 'textarea',
+    ));
+
+    // 連絡先
+    $wp_customize->add_setting('ishikai_org_contact', array(
+        'default' => '',
+    ));
+
+    $wp_customize->add_control('ishikai_org_contact_control', array(
+        'label'    => '連絡先',
+        'section'  => 'ishikai_org_info',
+        'settings' => 'ishikai_org_contact',
+        'type'     => 'textarea',
+    ));
 });
 
 /**

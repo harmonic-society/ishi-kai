@@ -66,27 +66,41 @@ get_header();
                 <!-- 団体情報 -->
                 <section class="about-section about-info">
                     <h2 class="about-section-title">団体情報</h2>
+                    <?php
+                    $org_established = get_theme_mod('ishikai_org_established', '');
+                    $org_representative = get_theme_mod('ishikai_org_representative', '');
+                    $org_address = get_theme_mod('ishikai_org_address', '');
+                    $org_contact = get_theme_mod('ishikai_org_contact', '');
+                    ?>
                     <dl class="info-list">
                         <div class="info-item">
                             <dt>団体名</dt>
                             <dd><?php bloginfo('name'); ?></dd>
                         </div>
+                        <?php if ($org_established) : ?>
                         <div class="info-item">
                             <dt>設立</dt>
-                            <dd><!-- 設立年を入力 --></dd>
+                            <dd><?php echo esc_html($org_established); ?></dd>
                         </div>
+                        <?php endif; ?>
+                        <?php if ($org_representative) : ?>
                         <div class="info-item">
                             <dt>代表</dt>
-                            <dd><!-- 代表者名を入力 --></dd>
+                            <dd><?php echo esc_html($org_representative); ?></dd>
                         </div>
+                        <?php endif; ?>
+                        <?php if ($org_address) : ?>
                         <div class="info-item">
                             <dt>所在地</dt>
-                            <dd><!-- 所在地を入力 --></dd>
+                            <dd><?php echo nl2br(esc_html($org_address)); ?></dd>
                         </div>
+                        <?php endif; ?>
+                        <?php if ($org_contact) : ?>
                         <div class="info-item">
                             <dt>連絡先</dt>
-                            <dd><!-- 連絡先を入力 --></dd>
+                            <dd><?php echo nl2br(esc_html($org_contact)); ?></dd>
                         </div>
+                        <?php endif; ?>
                     </dl>
                 </section>
 
