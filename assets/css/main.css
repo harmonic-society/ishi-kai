@@ -29,11 +29,6 @@
     gap: var(--spacing-sm);
 }
 
-.site-logo img {
-    max-height: 50px;
-    width: auto;
-}
-
 .site-title {
     margin: 0;
     font-size: 1.5rem;
@@ -46,7 +41,42 @@
 }
 
 .site-title a:hover {
-    color: var(--color-shu);
+    color: var(--color-ai);
+}
+
+.site-title a:hover .logo-star {
+    transform: rotate(72deg) scale(1.2);
+    color: var(--color-shu-light);
+}
+
+/* Logo Text Styling */
+.logo-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    font-family: var(--font-family-serif);
+    background: linear-gradient(135deg, var(--color-ai) 0%, var(--color-ai-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-ishi {
+    font-weight: 900;
+}
+
+.logo-star {
+    display: inline-block;
+    -webkit-text-fill-color: var(--color-shu);
+    font-size: 1.5rem;
+    margin: 0 0.05em;
+    transition: transform var(--transition-base), color var(--transition-base);
+}
+
+.logo-kai {
+    font-weight: 900;
 }
 
 .site-description {
