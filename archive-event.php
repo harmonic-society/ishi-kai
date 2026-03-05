@@ -15,7 +15,7 @@ get_header();
         <header class="page-header">
             <h1 class="page-title">イベント一覧</h1>
             <p class="page-subtitle">Events</p>
-            <p class="page-description">石井会で開催されるイベントの一覧です。</p>
+            <p class="page-description">いしい★会で開催されるイベントの一覧です。</p>
         </header>
 
         <?php if (have_posts()) : ?>

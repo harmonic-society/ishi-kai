@@ -243,7 +243,7 @@ function ishikai_event_meta_box_callback($post) {
         'event_fee' => array('label' => '参加費', 'type' => 'text', 'placeholder' => '例: 3,000円（学生1,500円）'),
         'event_capacity' => array('label' => '定員', 'type' => 'text', 'placeholder' => '例: 30名'),
         'event_registration' => array('label' => '申込方法', 'type' => 'textarea', 'placeholder' => '申込フォームURL、申込方法の説明など'),
-        'event_organizer' => array('label' => '主催', 'type' => 'text', 'placeholder' => '例: 石井会'),
+        'event_organizer' => array('label' => '主催', 'type' => 'text', 'placeholder' => '例: いしい★会'),
         'event_contact' => array('label' => '問い合わせ先', 'type' => 'textarea', 'placeholder' => 'メールアドレス、電話番号など'),
         'event_notes' => array('label' => '注意事項', 'type' => 'textarea', 'placeholder' => 'キャンセル規定、持ち物、その他注意事項など'),
     );

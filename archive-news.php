@@ -15,7 +15,7 @@ get_header();
         <header class="page-header">
             <h1 class="page-title">お知らせ一覧</h1>
             <p class="page-subtitle">News</p>
-            <p class="page-description">石井会からのお知らせ一覧です。</p>
+            <p class="page-description">いしい★会からのお知らせ一覧です。</p>
         </header>
 
         <?php if (have_posts()) : ?>
