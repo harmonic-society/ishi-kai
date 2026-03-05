@@ -52,7 +52,7 @@ get_header();
                 <!-- ゆきこ -->
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Gemini_Generated_Image_2t09222t09222t09.png" alt="ゆきこ" loading="lazy">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/TOP_別ページ.jpg" alt="ゆきこ" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h2 class="member-name">ゆきこ</h2>
