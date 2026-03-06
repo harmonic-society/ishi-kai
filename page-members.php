@@ -21,6 +21,20 @@ get_header();
             </header>
 
             <section class="members-grid">
+                <!-- イシー -->
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/S__43802629.jpg" alt="イシー" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h2 class="member-name">イシー</h2>
+                        <p class="member-role">ヒトツナギ</p>
+                        <p class="member-bio">
+                            個人事業でおそうじ、ビルメンテナンス業。立ち上げから25年。若い時から人が好きで、社会人サークルからカークラブまで一時期運営したり、様々な業界と繋がり一緒に楽しいことをやってきた催し好き。芸能系や経営者の方々とも仲良くして、イベンターとも繋がって、日本を盛り上げようと活動中。
+                        </p>
+                    </div>
+                </div>
+
                 <!-- もろきゅう -->
                 <div class="member-card">
                     <div class="member-photo">
