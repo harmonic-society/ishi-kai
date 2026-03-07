@@ -24,13 +24,27 @@ get_header();
                 <!-- イシー -->
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/S__43802629.jpg" alt="イシー" loading="lazy">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/S__43819011.jpg" alt="イシー" loading="lazy">
                     </div>
                     <div class="member-info">
                         <h2 class="member-name">イシー</h2>
                         <p class="member-role">ヒトツナギ</p>
                         <p class="member-bio">
                             個人事業でおそうじ、ビルメンテナンス業。立ち上げから25年。若い時から人が好きで、社会人サークルからカークラブまで一時期運営したり、様々な業界と繋がり一緒に楽しいことをやってきた催し好き。芸能系や経営者の方々とも仲良くして、イベンターとも繋がって、日本を盛り上げようと活動中。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ゆう -->
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/S__43900934.jpg" alt="ゆう" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h2 class="member-name">ゆう</h2>
+                        <p class="member-role">配送屋兼何でも屋として修業中</p>
+                        <p class="member-bio">
+                            高校卒業後紆余曲折を経て引きこもりから脱して、仕事を転々とし、配送業に落ち着く。現在は個人で配送や引っ越しの依頼を受けたり、何でも屋として修業している。
                         </p>
                     </div>
                 </div>
@@ -73,6 +87,19 @@ get_header();
                         <p class="member-role">地域繋がり✖️あったか 手描きデザイナー</p>
                         <p class="member-bio">
                             東海大学卒業後、ゲーム会社でデザイナーを経験。飲食関連でアルバイトしながらフリーランスとしてスタート。絵本風の手描きイラストで、地域社会問題と人をつなぎ、調和・事業拡大へと導きます。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- のぶ -->
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/S__43900932.jpg" alt="のぶ" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h2 class="member-name">のぶ</h2>
+                        <p class="member-bio">
+                            日本の伝統精神、文化である本物の武術を追求、修行中。日本人の失った日本魂を武術を通じて復興させたい。
                         </p>
                     </div>
                 </div>
